@@ -24,6 +24,7 @@
  */
 package com.iluwatar.compositeview;
 
+import io.openpixee.security.Jakarta;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -53,7 +54,7 @@ public final class AppServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
           throws ServletException, IOException {
-    RequestDispatcher requestDispatcher = req.getRequestDispatcher(destination);
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(Jakarta.validateForwardPath(destination));
     ClientPropertiesBean reqParams = new ClientPropertiesBean(req);
     req.setAttribute("properties", reqParams);
     requestDispatcher.forward(req, resp);
