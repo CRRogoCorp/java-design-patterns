@@ -23,6 +23,7 @@
  * THE SOFTWARE.
  */
 package com.iluwatar.retry;
+import java.security.SecureRandom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ import java.util.function.Predicate;
  * @author George Aristy (george.aristy@gmail.com)
  */
 public final class RetryExponentialBackoff<T> implements BusinessOperation<T> {
-  private static final Random RANDOM = new Random();
+  private static final Random RANDOM = new SecureRandom();
   private final BusinessOperation<T> op;
   private final int maxAttempts;
   private final long maxDelay;
