@@ -34,6 +34,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
@@ -102,7 +103,7 @@ public class Utility {
   public static String downloadFile(String urlString) throws IOException {
     LOGGER.info("Downloading contents from url: {}", urlString);
     var url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
-    var file = File.createTempFile("promise_pattern", null);
+    var file = Files.createTempFile("promise_pattern", null).toFile();
     try (var bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
          var writer = new FileWriter(file)) {
       String line;
