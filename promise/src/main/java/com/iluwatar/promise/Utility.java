@@ -24,6 +24,7 @@
  */
 package com.iluwatar.promise;
 
+import io.github.pixee.security.BoundedLineReader;
 import io.github.pixee.security.HostValidator;
 import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
@@ -105,7 +106,7 @@ public class Utility {
     try (var bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
          var writer = new FileWriter(file)) {
       String line;
-      while ((line = bufferedReader.readLine()) != null) {
+      while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
         writer.write(line);
         writer.write("\n");
       }
